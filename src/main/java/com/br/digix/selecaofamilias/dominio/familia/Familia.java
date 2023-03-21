@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Set;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "familia")
 @Entity(name = "Familia")
 @Getter
@@ -24,7 +24,6 @@ public class Familia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pessoa_pai_id")
