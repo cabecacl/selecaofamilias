@@ -1,5 +1,6 @@
 package com.br.digix.selecaofamilias.dominio.familia;
 
+import com.br.digix.selecaofamilias.dominio.dependente.DadosCadastroDependente;
 import com.br.digix.selecaofamilias.dominio.pessoa.Pessoa;
 import com.br.digix.selecaofamilias.dominio.dependente.Dependente;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +13,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Set;
 
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "familia")
 @Entity(name = "Familia")
 @Getter
@@ -25,17 +25,22 @@ public class Familia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "pessoa_pai_id")
     private Pessoa pai;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "pessoa_mae_id")
     private Pessoa mae;
 
     private int pontuacaoFamilia;
 
     @OneToMany(mappedBy = "familia", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Dependente> listaDependentes;
+    private List<Dependente> listaDependentes;
 
+    public Familia(DadosCadastroFamilia dados) {
+        this.pai = new Pessoa(dados.pai());
+        this.mae = new Pessoa(dados.mae());
+        this.listaDependentes = dados.listaDependentes().stream().map(dependente -> new Dependente(dependente, this)).toList();
+    }
 }

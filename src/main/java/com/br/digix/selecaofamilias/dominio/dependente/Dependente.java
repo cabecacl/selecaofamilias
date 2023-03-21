@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "dependentes")
 @Entity(name = "Dependentes")
 @Getter
@@ -23,12 +22,17 @@ public class Dependente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "pessoa_id")
     private Pessoa dependente;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "familia_id", nullable = false)
     private Familia familia;
+
+    public Dependente(DadosCadastroDependente dependente, Familia familia) {
+        this.dependente = new Pessoa(dependente.dependente());
+        this.familia = familia;
+    }
 }

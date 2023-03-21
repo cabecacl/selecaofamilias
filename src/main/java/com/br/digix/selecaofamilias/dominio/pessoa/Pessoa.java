@@ -1,6 +1,5 @@
 package com.br.digix.selecaofamilias.dominio.pessoa;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "pessoa")
 @Entity(name = "Pessoa")
 @Getter
@@ -31,4 +29,13 @@ public class Pessoa {
     private String email;
     private String telefone;
 
+    public Pessoa(DadosCadastroPessoa dados) {
+        this.nome = dados.nome();
+        this.cpf = dados.cpf();
+        this.idade = dados.idade();
+        this.tipoPessoa = dados.tipoPessoa();
+        this.renda = dados.renda();
+        this.email = dados.email();
+        this.telefone = dados.telefone();
+    }
 }
