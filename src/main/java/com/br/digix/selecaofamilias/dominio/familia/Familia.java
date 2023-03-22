@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
 import java.util.Set;
@@ -39,8 +40,18 @@ public class Familia {
     private List<Dependente> listaDependentes;
 
     public Familia(DadosCadastroFamilia dados) {
-        this.pai = new Pessoa(dados.pai());
-        this.mae = new Pessoa(dados.mae());
+        if(dados.pai() != null && Strings.isBlank(dados.pai().cpf())){
+            this.pai = null;
+        }else{
+            this.pai = new Pessoa(dados.pai());
+        }
+
+        if(dados.mae() != null && Strings.isBlank(dados.mae().cpf())){
+            this.mae = null;
+        }else{
+            this.mae = new Pessoa(dados.mae());
+        }
+
         this.listaDependentes = dados.listaDependentes().stream().map(dependente -> new Dependente(dependente, this)).toList();
     }
 }

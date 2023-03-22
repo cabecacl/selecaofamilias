@@ -1,9 +1,6 @@
 package com.br.digix.selecaofamilias.controle;
 
-import com.br.digix.selecaofamilias.dominio.familia.DadosCadastroFamilia;
-import com.br.digix.selecaofamilias.dominio.familia.DadosListagemFamilia;
-import com.br.digix.selecaofamilias.dominio.familia.Familia;
-import com.br.digix.selecaofamilias.dominio.familia.RepositorioFamilia;
+import com.br.digix.selecaofamilias.dominio.familia.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +18,8 @@ public class ControleFamilia {
 
     @Autowired
     private RepositorioFamilia repositorioFamilia;
+    @Autowired
+    private ServiceFamilia serviceFamilia;
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemFamilia>> listar(@PageableDefault(size = 100, sort = {"pontuacaoFamilia"}, direction = Sort.Direction.DESC) Pageable paginacao) {
@@ -31,8 +30,12 @@ public class ControleFamilia {
     @PostMapping
     @Transactional
     public ResponseEntity cadastrarFamilia(@RequestBody @Valid DadosCadastroFamilia dados, UriComponentsBuilder uriBuilder) {
+
+        serviceFamilia.cadastrarFamilia(dados);
+
         var familia = new Familia(dados);
         repositorioFamilia.save(familia);
+
 
         var uri = uriBuilder.path("/familia/{id}").buildAndExpand(familia.getId()).toUri();
 
