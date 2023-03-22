@@ -31,15 +31,15 @@ public class ControleFamilia {
     @Transactional
     public ResponseEntity cadastrarFamilia(@RequestBody @Valid DadosCadastroFamilia dados, UriComponentsBuilder uriBuilder) {
 
-        serviceFamilia.cadastrarFamilia(dados);
+        var familia =  serviceFamilia.cadastrarFamilia(dados);
 
-        var familia = new Familia(dados);
-        repositorioFamilia.save(familia);
+//        var familia = new Familia(dados);
+//        repositorioFamilia.save(familia);
 
 
-        var uri = uriBuilder.path("/familia/{id}").buildAndExpand(familia.getId()).toUri();
+        var uri = uriBuilder.path("/familia/{id}").buildAndExpand(familia.id()).toUri();
 
-        return ResponseEntity.created(uri).body(new DadosListagemFamilia(familia));
+        return ResponseEntity.created(uri).body(familia);
     }
 
 }

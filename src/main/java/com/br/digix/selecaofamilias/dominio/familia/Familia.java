@@ -5,10 +5,7 @@ import com.br.digix.selecaofamilias.dominio.pessoa.Pessoa;
 import com.br.digix.selecaofamilias.dominio.dependente.Dependente;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.Set;
 @Table(name = "familia")
 @Entity(name = "Familia")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
