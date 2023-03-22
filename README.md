@@ -8,42 +8,44 @@
 
 Projeto de desafio técnico. Consiste na seleção de famílias para ganhar uma casa popular do governo, tendo assim uma pontuação por critérios predefinidos.
 
-Tecnologias
+## Tecnologias
 
 O projeto é uma Api Rest, desenvolvida com as seguintes tecnologias/frameworks:
-Java
-Spring Boot
-Lombok
-JUnit
-Spring Data JPA
-Flywaydb
-Spring Doc
+ * ``Java``
+ * ``Spring Boot``
+ * ``Lombok``
+ * ``JUnit``
+ * ``Spring Data JPA``
+ * ``Flywaydb``
+ * ``Spring Doc``
 
-Estrutura
+## Estrutura
 
 Mantendo o padrão de camadas e organização foram criadas as seguintes camadas:
-controle
-dominio
-infra
+ * controle
+ * dominio
+ * infra
 
-Controle: Nesta camada fica centralizado os controles que disponibilizam os verbos rest para realização dos processos de cadastro de família e listagem por pontuação.
-Domínio: O domínio tem as classes de mapeamento para o banco de dados, como também, as classes de transferência de dados pela API (classes records) e as classes de validação/regras.
-Infra: Aqui está as configurações de documentação para swagger e tratamentos de erros gerais
+``Controle``: Nesta camada fica centralizado os controles que disponibilizam os verbos rest para realização dos processos de cadastro de família e listagem por pontuação. <p/>
+``Domínio:`` O domínio tem as classes de mapeamento para o banco de dados, como também, as classes de transferência de dados pela API (classes records) e as classes de validação/regras. <p/>
+``Infra:`` Aqui está as configurações de documentação para swagger e tratamentos de erros gerais
 
 OBS: Com a utilização do Flywaydb é necessário criar uma pasta para armazenar as migrations(arquivos de evolução do banco de dados)
 
 
-Documentação
+## Documentação
 
-A documentação da api foi realizada pela Open Api, onde disponibiliza o swagger como interface de documentação e execução.
+A documentação da api foi realizada pela Open Api, onde disponibiliza o swagger como interface de documentação e execução.<p/>
+[Seleção de Familias Swagger](http://localhost:8080/selecaofamilias/swagger-ui/index.html) <p/>
+[Seleção de Familias V3 Api Docs](http://localhost:8080/selecaofamilias/v3/api-docs) <p/>
 
 
-Testes
+## Testes
 
 Os testes foram focados em dois pontos, o primeiro foi o cadastro de família com seus dependentes e o segundo na validação de regras de pontuação.
 Não foram realizados testes unitários para classes de domínio, pois, os testes de cadastro no banco de dados e recuperação desses dados, informa a integridade das classes mapeadas e seus relacionamentos.
 
-Conclusão
+## Conclusão
 
 O desafio aparentemente simples, exigiu um nível de complexidade maior que o analisado inicialmente, tendo tanto regras de preenchimento quanto de interpretação. Fazendo assim a criação de um projeto mais robusto e mais criterioso.
 Outro ponto que gostaria de colocar, seria a escolha de fazer testes automatizados, interagindo com o banco de dados real, trazendo uma maior segurança na execução das atividades.
@@ -51,6 +53,9 @@ Outro ponto que gostaria de colocar, seria a escolha de fazer testes automatizad
 
 Obrigado pelo desafio.
 
-P.S. ainda existe muita coisa a melhorar, espero que gostem…
+``P.S. ainda existe muita coisa a melhorar, espero que gostem…``
 
+# Autor
 
+| [<img src="https://avatars.githubusercontent.com/u/20528621?v=4" width=115><br><sub>Cleiton de Aguiar Silva</sub>](https://github.com/cabecacl) |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------:|
