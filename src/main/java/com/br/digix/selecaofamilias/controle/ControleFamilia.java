@@ -22,7 +22,7 @@ public class ControleFamilia {
     private ServiceFamilia serviceFamilia;
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemFamilia>> listar(@PageableDefault(size = 100, sort = {"pontuacaoFamilia"}, direction = Sort.Direction.DESC) Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemFamilia>> listarFamiliasPontuacao(@PageableDefault(size = 100, sort = {"pontuacaoFamilia"}, direction = Sort.Direction.DESC) Pageable paginacao) {
         var page = repositorioFamilia.findAll(paginacao).map(DadosListagemFamilia::new);
         return ResponseEntity.ok(page);
     }
@@ -32,10 +32,6 @@ public class ControleFamilia {
     public ResponseEntity cadastrarFamilia(@RequestBody @Valid DadosCadastroFamilia dados, UriComponentsBuilder uriBuilder) {
 
         var familia =  serviceFamilia.cadastrarFamilia(dados);
-
-//        var familia = new Familia(dados);
-//        repositorioFamilia.save(familia);
-
 
         var uri = uriBuilder.path("/familia/{id}").buildAndExpand(familia.id()).toUri();
 
